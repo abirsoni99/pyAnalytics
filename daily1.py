@@ -159,27 +159,32 @@ list1
 import numpy
 numpy.array([10,20])
 numpy.array([list1])
-
+help(numpy.array)
 import numpy as np #np is alias
 np1 = np.arange(1,10)
 np1
-
-x=np.arange(start=1,stop=1000000,step=2)
+dir(numpy)
+x=np.arange(start=1,stop=1000000,step=5)
+x
 len(x)
-x[1:100]
+x[0:100]
 x[1:50:10]
 np
 np.mean(np.arange(1,10000000))
+np.mean(x)
 np1
 type(np1)
 np?
 #help on numpy 
 dir(np)  #functions available in numpy
 np.mean?  # help on mean function of numpy
-
+help(np.mean)
 np2 = np.array([ 90, 50, 60, 70 ])
+np.mean(np2)
+np2.mean()
 np2
 np.sort(np2)
+
 dir(np)
 
 np3 = np.array([[1,4],[3,1],[5,6],[10,50]])
@@ -196,8 +201,8 @@ np3.reshape((-1,1))  #1 column from 2 column
 import pandas as pd
 pd?
 dir(pd)
-
-df1 = pd.DataFrame({'rollno':[1,2,3,4], 'name': [ "Dhiraj", "Kounal", "Akhil", "Pooja" ], 'marks':[ 40, 50, 60.5, 70 ], 'gender':['M', 'M','M', 'F']})
+help(pd)
+df1 = pd.DataFrame({'rollno':[1,2,3,4,5], 'name': [ "Dhiraj", "Kounal", "Akhil", "Pooja","Abir" ], 'marks':[ 40, 50, 60.5, 70 ,70], 'gender':['M', 'M','M', 'F','M'],'Course':['Btech','MBA','MTech','MS','Btech'], 'seq':np.arange(start=10,stop=15,step=1)})
 df1
 type(df1) 
 
@@ -208,15 +213,21 @@ df1.dtypes #data types
 df1.shape  # rows and columns
 df1.groupby('gender').size()
 df1.groupby('gender')['marks'].mean()
-df1.groupby('gender').aggregate({'marks': [np.mean, 'max','min','std','count']})
+df1.groupby('gender')['marks'].max()
 
+df1.groupby('gender').aggregate({'marks': [np.mean]})
+df1.groupby('gender').aggregate({'marks': [np.mean, 'max','min','std','count']})
+#no count function in np
+df1.groupby('gender').aggregate({'marks': [np.mean, np.max,np.min,np.std,'count']})
+df1.groupby('gender').aggregate({'marks': [np.mean, 'max'],'seq':[np.mean, np.max, 'count']})
+df1.groupby(['gender', 'Course']).aggregate({'marks': [np.mean, 'max','min','std','count']})
 #%% #Graphs https://python-graph-gallery.com/
 #https://matplotlib.org/
 
 import matplotlib.pyplot as plt
 df1.groupby('gender').size()
 df1.groupby('gender').size().plot(kind='bar')
-
+#pieplot
 plt.hist(df1['marks'])
 
 #https://seaborn.pydata.org/index.html
@@ -266,7 +277,7 @@ data2a
 data2a = pd.read_csv('mtcars.csv') #when csv is in project folder
 data2a
 data2b
-data2b = pd.read_csv('E:/analytics/projects/pyanalytics/mtcars.csv')
+data2b = pd.read_csv('C:/analytics/projects/pyanalytics/mtcars.csv')
 data2b
 #csv in any other location - full path
 data2b
@@ -275,8 +286,9 @@ data2a.head()
 data2c = pd.read_excel('mtcarsExcel.xlsx',header=0)
 #header=None
 data2c.head()
-
-
-
+data2c.describe()
+data2c.columns
+data2b.groupby('gear').size().plot(kind='bar')
+data2b.groupby(['gear','cyl']).aggregate({'mpg':['count','mean','std',np.max],'wt':np.mean})
 #end here....
 #now practise numpy and pandas....
