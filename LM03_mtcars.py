@@ -1,4 +1,5 @@
 #Topic ---- Dividing Data into Train and Test 
+#imp link: https://stackoverflow.com/questions/58955816/difference-between-shuffle-and-random-state-in-train-test-split
 from sklearn.model_selection import train_test_split
 import numpy as np
 import pandas as pd
@@ -7,15 +8,19 @@ from pydataset import data
 mtcars = data('mtcars')
 data=mtcars
 id(mtcars)
+help(id(mtcars))
 id(data)
 type(data)
 data = mtcars.copy()
 id(data)
-
+help(id)
 data.head()
 data.columns
 data.dtypes
 data.shape
+zeta=range(5)
+zeta1=list(zeta)
+zeta1
 #%%% Sample by number
 
 s1 = data.sample(10) #select 10 rows on random basis
@@ -32,6 +37,8 @@ X
 list(y)
 #split X and y
 X_train, X_test, y_train, y_test = train_test_split( X, y, test_size= 0.33, random_state=42)
+help(train_test_split)
+#If ``train_size`` is also None, it will be set to 0.25. by default
 X_train
 y_train
 X_test
@@ -39,7 +46,7 @@ y_test
 #target variable
 train_test_split(y, shuffle=True)
 train_test_split(y, shuffle=False)
-
+#if shuffle set to False, all the n first observations in your array will go in the train dataset, and all others in the test dataset
 #%%%
 from sklearn.model_selection import train_test_split
 from sklearn.datasets import load_iris
