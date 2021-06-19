@@ -14,19 +14,27 @@ sleep2
 #NaN => No data found --- blank
 sleep = sleep2.copy()
 
-#select to drop the rows only if all of the values in the row are missing.
+    #select to drop the rows only if all of the values in the row are missing.
 sleep.dropna(how='all',inplace=False).shape
-sleep.isna().sum(axis=1)
-sleep.isna().sum(axis=0)
+#For isna - axis = 1 => Row. axis = 0 => Column
+sleep.isna().sum(axis=1) #row
+sleep.isna().sum(axis=0) #column
+
 
 #just want to drop a column (variable) that has some missing values.
 sleep.head()
-sleep.dropna(axis=1,inplace=False).head()                
-sleep.dropna(axis=0,inplace=False).head()                
+sleep.dropna(axis=1,inplace=False).head()    
+#inplace replaces orignal df so orginal is retained. This is on this instance only, not on the sleep file
+sleep       
+sleep.dropna(axis=0,inplace=False).head()     #row
+help(sleep.isna)           
 sleep.shape
-#keep only the rows with at least 4 non-na values:
+#keep only the rows with at least threshold non-na values:
 sleep.dropna(thresh=9, axis=0, inplace=False).shape
-sleep.dropna(thresh=55, axis=1, inplace=False).shape
+# Keep only the rows with at least 9 non-NA values.
+sleep.dropna(thresh=55, axis=1, inplace=False).shape #column
+#list out those columns which have got atleast threshold non na values
+#Drop na: axis = 0 => Row. axis = 1 => Column
 s1= np.int(.6 * len(sleep)) ; s1
 #t1=55
 len(sleep)
