@@ -21,7 +21,7 @@ Col1=mtcars.columns[0]
 Col1
 mtcars = mtcars.rename(columns = {Col1:"Name"})
 #skewness
-mtcars.skew()
+mtcars.skew(axis=0)
 #kurtosis
 mtcars.kurt()      
 columns_here=list(['mpg','cyl','disp','hp','drat','wt','qsec','vs','am','gear','carb'])
@@ -37,6 +37,12 @@ plt.hist(mtcars.vs,bin=15)
 plt.hist(mtcars.am,bin=15)
 plt.hist(mtcars.gear,bin=15)
 plt.hist(mtcars.carb,bin=15)
+
+#for i in range(1,12,1):
+ #   plt.figure()
+  #  #plt.title("Histogram for: ",mtcars.columns[i])
+   # plt.hist(mtcars[mtcars.columns[i]],bin=15)
+
 #Covariance
 mtcars.cov()
 #Correlation
@@ -46,7 +52,7 @@ mtcars.corr()
 import seaborn as sns
 #box plot
 for i in range(1,12,1):
-    print("Outliers for Columns",mtcars.columns[i]);
+    print("Outliers for Columns: ",mtcars.columns[i]);
     plt.figure() #avoid superimposing
     sns.boxplot(x=mtcars[mtcars.columns[i]]).set(title='Boxplot for'+mtcars.columns[i])
     Q1 =mtcars[mtcars.columns[i]].quantile(0.25)
